@@ -10,6 +10,7 @@ import com.rahulpundhir.ecomm.data.network.response.productlist.ProductListRespo
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -18,16 +19,17 @@ import retrofit2.http.Path
 interface ShopApiService {
 
     @GET("category/tree")
-    fun getShopCategories(): Deferred<CategoryResponse>
+    fun getShopCategories(): Deferred<Response<CategoryResponse>>
 
     @GET("c/**/*-{categoryId}/%3FfilterAttribute_motive%3D{categoryName}")
     fun getProductList(
         @Path("categoryId") categoryId: String,
         @Path("categoryName") categoryName: String
-    ): Deferred<ProductListResponse>
+    ): Deferred<Response<ProductListResponse>>
 
     @GET("product/{pId}")
-    fun getProductDetails(@Path("pId") productId: String): Deferred<ProductResponse>
+    fun getProductDetails(@Path("pId") productId: String):
+            Deferred<Response<ProductResponse>>
 
     companion object {
         operator fun invoke(

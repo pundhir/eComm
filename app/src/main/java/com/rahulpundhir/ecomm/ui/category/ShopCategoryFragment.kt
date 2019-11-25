@@ -55,8 +55,16 @@ class ShopCategoryFragment : ScopedFragment(), KodeinAware {
             if (categoryResponse == null) {
                 return@Observer
             }
-            group_loading.visibility = View.GONE
-            initRecyclerView(categoryResponse.children.toShopCategoryItems())
+
+            if (categoryResponse.isSuccessful) {
+                group_loading.visibility = View.GONE
+                val data = categoryResponse.body()
+                data?.let {
+                    initRecyclerView(it.children.toShopCategoryItems())
+                }
+            } else {
+                // TODO - error handling
+            }
         })
     }
 

@@ -62,10 +62,23 @@ class ProductListFragment : ScopedFragment(), KodeinAware {
 
     private fun bindUI() = launch(Dispatchers.Main) {
         val productList = viewModel.productListData.await()
-        productList.observe(viewLifecycleOwner, Observer {
-            it?.let {
+        productList.observe(viewLifecycleOwner, Observer {productListResponse ->
+            if (productListResponse ==  null) {
+                return@Observer
+            }
+
+            if (productListResponse.isSuccessful) {
                 group_loading.visibility = View.GONE
-                initRecyclerView(it.productResults.toProductListItems())
+                val data = productListResponse.body()
+                data?.let {
+                    if (it.productResults.isEmpty()) {
+                        // TODO - error handling
+                    } else {
+                        initRecyclerView(it.productResults.toProductListItems())
+                    }
+                }
+            } else {
+                // TODO - error handling
             }
         })
     }

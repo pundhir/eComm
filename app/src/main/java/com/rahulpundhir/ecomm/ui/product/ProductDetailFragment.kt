@@ -60,19 +60,33 @@ class ProductDetailFragment : ScopedFragment(), KodeinAware, View.OnClickListene
 
     private fun bindUI() = launch {
         val productDetails = viewModel.productDetails.await()
-        productDetails.observe(viewLifecycleOwner, Observer {
-            it?.let {
+        productDetails.observe(viewLifecycleOwner, Observer { productResponse ->
+            if (productResponse ==  null) {
+                return@Observer
+            }
+
+            if (productResponse.isSuccessful) {
                 group_loading.visibility = View.GONE
                 group_display_page.visibility = View.VISIBLE
-                productDescription = it.longDescription
-                if (!it.imageUris.isEmpty()) {
-                    renderProductImage(it.imageUris[0])
+                val data = productResponse.body()
+                data?.let {
+                    productDescription = it.longDescription
+                    if (!it.imageUris.isEmpty()) {
+                        renderProductImage(it.imageUris[0])
+                    }
+                    textView_productDesc.text = it.nameShort
+                    textView_productDesc.setOnClickListener(this@ProductDetailFragment)
+                    ratingBar_productRating.rating = it.averageStars
+                    textView_numOfRatings.text = "(" + it.reviewers + ")"
+
+                    if (it.variations.isEmpty()) {
+                        // TODO - error handling
+                    } else {
+                        initRecyclerView(it.variations.toProductVariants())
+                    }
                 }
-                textView_productDesc.text = it.nameShort
-                textView_productDesc.setOnClickListener(this@ProductDetailFragment)
-                ratingBar_productRating.rating = it.averageStars
-                textView_numOfRatings.text = "(" + it.reviewers + ")"
-                initRecyclerView(it.variations.toProductVariants())
+            } else {
+                // TODO - error handling)
             }
         })
     }

@@ -7,17 +7,18 @@ import com.rahulpundhir.ecomm.data.network.response.category.CategoryResponse
 import com.rahulpundhir.ecomm.data.network.response.product.ProductResponse
 import com.rahulpundhir.ecomm.data.network.response.productlist.ProductListResponse
 import com.rahulpundhir.ecomm.internal.NoConnectivityException
+import retrofit2.Response
 import java.lang.Exception
 
 class ShopDataSourceImpl(private val apiService: ShopApiService) :
     ShopDataSource {
 
-    private val _requestShopCategories = MutableLiveData<CategoryResponse>()
-    private val _requestProductList = MutableLiveData<ProductListResponse>()
-    private val _requestShopProduct = MutableLiveData<ProductResponse>()
+    private val _requestShopCategories = MutableLiveData<Response<CategoryResponse>>()
+    private val _requestProductList = MutableLiveData<Response<ProductListResponse>>()
+    private val _requestShopProduct = MutableLiveData<Response<ProductResponse>>()
 
 
-    override val requestShopCategories: LiveData<CategoryResponse>
+    override val requestShopCategories: LiveData<Response<CategoryResponse>>
         get() = _requestShopCategories
 
     override suspend fun getShopCategories() {
@@ -31,7 +32,7 @@ class ShopDataSourceImpl(private val apiService: ShopApiService) :
         }
     }
 
-    override val requestProductList: LiveData<ProductListResponse>
+    override val requestProductList: LiveData<Response<ProductListResponse>>
         get() = _requestProductList
 
     override suspend fun getProductList(categoryId: String, categoryName: String) {
@@ -45,7 +46,7 @@ class ShopDataSourceImpl(private val apiService: ShopApiService) :
         }
     }
 
-    override val requestProduct: LiveData<ProductResponse>
+    override val requestProduct: LiveData<Response<ProductResponse>>
         get() = _requestShopProduct
 
     override suspend fun getProductDetails(pid: String) {

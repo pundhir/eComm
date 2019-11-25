@@ -7,18 +7,19 @@ import com.rahulpundhir.ecomm.data.network.response.product.ProductResponse
 import com.rahulpundhir.ecomm.data.network.response.productlist.ProductListResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import retrofit2.Response
 
 class ShopRepositoryImpl(private val shopDataSource: ShopDataSource) :
     ShopRepository {
 
-    override suspend fun getShopCategories(): LiveData<CategoryResponse> {
+    override suspend fun getShopCategories(): LiveData<Response<CategoryResponse>> {
         return withContext(Dispatchers.IO) {
             fetchShopCategory()
             return@withContext shopDataSource.requestShopCategories
         }
     }
 
-    override suspend fun getProductList(categoryId: String, categoryName: String): LiveData<ProductListResponse> {
+    override suspend fun getProductList(categoryId: String, categoryName: String): LiveData<Response<ProductListResponse>> {
 
         return withContext(Dispatchers.IO) {
             fetchProductList(categoryId, categoryName)
@@ -27,7 +28,7 @@ class ShopRepositoryImpl(private val shopDataSource: ShopDataSource) :
 
     }
 
-    override suspend fun getProductDetail(pId: String): LiveData<ProductResponse> {
+    override suspend fun getProductDetail(pId: String): LiveData<Response<ProductResponse>> {
 
         return withContext(Dispatchers.IO) {
             fetchProductDetail(pId)
