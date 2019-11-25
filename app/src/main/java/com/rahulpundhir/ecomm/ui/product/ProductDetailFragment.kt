@@ -18,6 +18,7 @@ import com.rahulpundhir.ecomm.data.network.response.product.Variation
 import com.rahulpundhir.ecomm.internal.GlideApp
 import com.rahulpundhir.ecomm.ui.base.ScopedFragment
 import com.rahulpundhir.ecomm.ui.productlist.ProductListItem
+import com.rahulpundhir.ecomm.ui.util.Utilities
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.product_detail_fragment.*
@@ -33,7 +34,6 @@ class ProductDetailFragment : ScopedFragment(), KodeinAware, View.OnClickListene
     override val kodein by closestKodein()
     lateinit var productDescription: String
 
-    @VisibleForTesting
     private val viewModelFactory: ((String) -> ProductDetailViewModelFactory) by factory()
 
     companion object {
@@ -128,17 +128,9 @@ class ProductDetailFragment : ScopedFragment(), KodeinAware, View.OnClickListene
     override fun onClick(view: View?) {
         when {
             view?.id == textView_productDesc.id -> {
-                showProductDescription()
+                Utilities.showProductDescription(this@ProductDetailFragment.context!!,
+                    "Product Description", productDescription)
             }
         }
-    }
-
-    private fun showProductDescription() {
-        AlertDialog.Builder(this@ProductDetailFragment.context!!)
-            .setCancelable(false)
-            .setTitle("Product Description")
-            .setMessage(Html.fromHtml(productDescription))
-            .setPositiveButton(
-                "Ok", DialogInterface.OnClickListener { dialog, which -> }).show()
     }
 }
