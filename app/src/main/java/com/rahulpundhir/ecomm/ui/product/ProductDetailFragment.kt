@@ -119,7 +119,7 @@ class ProductDetailFragment : ScopedFragment(), KodeinAware, View.OnClickListene
                 Toast.makeText(
                     this@ProductDetailFragment.context,
                     "Cart implementation is in progress....",
-                    Toast.LENGTH_LONG
+                    Toast.LENGTH_SHORT
                 ).show()
             }
         }

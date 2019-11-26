@@ -1,8 +1,5 @@
 package com.rahulpundhir.ecomm.data.network.response.productlist
 
-
-import com.google.gson.annotations.SerializedName
-
 data class ProductListResponse(
     val activeSorting: ActiveSorting,
     val brands: List<Brand>,

@@ -108,7 +108,7 @@ class ProductListFragment : ScopedFragment(), KodeinAware {
         Toast.makeText(
             this@ProductListFragment.context,
             "Product Id = " + productId,
-            Toast.LENGTH_LONG
+            Toast.LENGTH_SHORT
         ).show()
         val bundle = Bundle()
         bundle.putString(ProductDetailFragment.INTENT_ARG_PRODUCT_ID, productId)

@@ -4,4 +4,6 @@
     <string name="variants_label">Product Variants</string>
     <string name="product_list_not_available">Product list is not available</string>
     <string name="product_variants_not_available">Product variants are not available</string>
+    <string name="connection_error_text">"There is no internet connection available. Please make sure that you have data connections enabled."</string>
+
 </resources>
