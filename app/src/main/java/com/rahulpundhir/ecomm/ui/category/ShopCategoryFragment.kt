@@ -62,8 +62,6 @@ class ShopCategoryFragment : ScopedFragment(), KodeinAware {
                 data?.let {
                     initRecyclerView(it.children.toShopCategoryItems())
                 }
-            } else {
-                // TODO - error handling
             }
         })
     }
