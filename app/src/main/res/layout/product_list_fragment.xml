@@ -44,4 +44,13 @@
         android:clipToPadding="false"
         android:padding="@dimen/view_standard_margin" />
 
+    <TextView
+        android:id="@+id/textView_productList_error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+        android:text="@string/product_list_not_available"
+        android:gravity="center"
+        android:visibility="gone"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

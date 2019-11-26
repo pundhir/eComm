@@ -72,13 +72,13 @@ class ProductListFragment : ScopedFragment(), KodeinAware {
                 val data = productListResponse.body()
                 data?.let {
                     if (it.productResults.isEmpty()) {
-                        // TODO - error handling
+                        textView_productList_error.visibility = View.VISIBLE
                     } else {
                         initRecyclerView(it.productResults.toProductListItems())
                     }
                 }
             } else {
-                // TODO - error handling
+                textView_productList_error.visibility = View.VISIBLE
             }
         })
     }

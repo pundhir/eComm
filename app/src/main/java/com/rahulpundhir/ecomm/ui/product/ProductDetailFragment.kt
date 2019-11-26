@@ -80,13 +80,13 @@ class ProductDetailFragment : ScopedFragment(), KodeinAware, View.OnClickListene
                     textView_numOfRatings.text = "(" + it.reviewers + ")"
 
                     if (it.variations.isEmpty()) {
-                        // TODO - error handling
+                        textView_productDetail_error.visibility = View.VISIBLE
                     } else {
                         initRecyclerView(it.variations.toProductVariants())
                     }
                 }
             } else {
-                // TODO - error handling)
+                textView_productDetail_error.visibility = View.VISIBLE
             }
         })
     }

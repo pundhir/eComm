@@ -2,4 +2,6 @@
     <string name="app_name">eComm</string>
     <string name="page_loading">Loading&#8230;</string>
     <string name="variants_label">Product Variants</string>
+    <string name="product_list_not_available">Product list is not available</string>
+    <string name="product_variants_not_available">Product variants are not available</string>
 </resources>

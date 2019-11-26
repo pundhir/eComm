@@ -92,7 +92,7 @@ class ShopCategoryFragment : ScopedFragment(), KodeinAware {
     private fun showCategoryProductList(catId: Int, catName: String) {
         val bundle = Bundle()
         bundle.putString(ProductListFragment.INTENT_ARG_CATEGORY_ID, catId.toString())
-        var category = URLEncoder.encode(catName, "utf-8");
+        val category = URLEncoder.encode(catName, "utf-8");
         bundle.putString(ProductListFragment.INTENT_ARG_CATEGORY_NAME, category)
         ProductListActivity.start(this@ShopCategoryFragment.context!!, bundle)
     }
